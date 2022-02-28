@@ -14,6 +14,8 @@
     grid-area: text;
     margin-top: -35vh;
     text-align: left;
+    margin-left: 1vw;
+    margin-right: 2vw;
 }
 .portrait-outline {
     background: black;
@@ -35,6 +37,7 @@
 }
 
 #about-title {
+    margin-left: 1vw;
     grid-area: title;
     color: rgb(0, 0, 0);
     font-size: 290%;

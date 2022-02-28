@@ -946,14 +946,11 @@
 		
 	}
 
-	document.getElementsByClassName('menu-container')[0].addEventListener('click', function(){menuIcon()});
-
-	function menuIcon() {
-  		document.getElementsByClassName('menu-container')[0].classList.toggle("change");
-		// document.getElementsByClassName('menu-container')[0].style.background= 'rgb(255, 255, 255,1)'
-	}
-
-	document.getElementById('sorter-sortButton').addEventListener('click', async function () {
+	
+	document.getElementById('sorter-sortButton').addEventListener('click',function (){sort()})
+	
+	
+	async function sort() {
 		document.getElementById('sorter-sortButton').disabled = true
 		document.getElementById('sorter-sortButton').style.color = 'rgb(233, 233, 233, .8)'
 		document.getElementById('sorter-sortButton').style.backgroundColor = 'rgb(181, 181, 181)'
@@ -1000,6 +997,6 @@
 		else {
 			console.log(document.getElementById('sorter-dropdown'))
 		}
-	});
+	}
   </script>
 </html>
