@@ -12,9 +12,9 @@ function About (){
             </div>
             <div className='about-text' id='about-summary'>
                 <p>
-                    I'm currently a student at the University of Minnesota Duluth and plan to graduate in December 2022 with a Bacelor of Science.
+                    I'm currently a student at the University of Minnesota Duluth and plan to graduate in December 2022 with a Bachelor of Science.
                     I'm double majoring in Computer Science and Actuarial Science with a minor in mathematics.
-                    After graduation I am looking to a become a software engineer because I have a passion for coding. 
+                    After graduation I am looking to become a software engineer because I have a passion for coding. 
                     Outside of school and work I really enjoy hiking, fishing, and camping! To see more about my
                     professional life try visiting my <a className='about-links' href='https://www.linkedin.com/in/joe-fee/'> 
                     LinkedIn</a>, or looking at my <a className='about-links' href='https://onedrive.live.com/embed?cid=3941F29AAE8D1D54&resid=3941F29AAE8D1D54%214740&authkey=AB3Ak1uylMACwyI&em=2'>resume</a>.
