@@ -10,9 +10,9 @@ class Footer extends React.Component {
         <div id="footer-base">
     <footer class="site-footer">
 
-        <a href="#link" class="fa fa-facebook"></a>
-        <a href="#link" class="fa fa-twitter"></a>
-        <a href="#link" class="fa fa-github"></a>
+        <a href="#link" class="fa fa-facebook"> </a>
+        <a href="#link" class="fa fa-twitter"> </a>
+        <a href="#link" class="fa fa-github"> </a>
       <div class="container">
         <div class="row">
 
