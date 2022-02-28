@@ -1,25 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Background from './components/background/background';
+import Title from './components/title/Title.js';
+import Selector from './components/Selector/Selector.js'
+import Sorter from "./components/sorter/Sorter.js"
+import PathFinder from './components/PathFinder/PathFinder.js';
+import About from './components/About/About.js';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Background>
+        <Sorter/>
+        <PathFinder/>
+        <Title/>
+        <Selector/>
+        <About/>
+        <Footer/>
+      </Background>
     </div>
   );
 }
+
 
 export default App;

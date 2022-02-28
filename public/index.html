@@ -2,19 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="https://static.thenounproject.com/png/445178-200.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Personal Website for Joe Fee"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -24,7 +28,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Joseph Fee | Developer</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -40,4 +44,962 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script src="../src/tes.js"></script>
+  <script>
+
+	async function merge(arr, start, mid, end){
+		var solvedColor =  "#B0EE9D";
+		var comparingColor = "#f47174";
+		var startColor = "#ffffff";
+
+		let start2 = mid + 1;
+
+		// If the direct merge is already sorted
+		if (Number(arr[mid].getAttribute('val')) <= Number(arr[start2].getAttribute('val')))
+		{
+			return;
+		}
+
+		// Two pointers to maintain start
+		// of both arrays to merge
+		while (start <= mid && start2 <= end)
+		{
+
+			// If element 1 is in right place
+			if (Number(arr[start].getAttribute('val')) <= Number(arr[start2].getAttribute('val')))
+			{
+				start++;
+			}
+			else
+			{
+				let value = arr[start2];
+				let index = start2;
+
+				// Shift all the elements between element 1
+				// element 2, right by 1.
+				while (index != start)
+				{
+					arr[index].style.backgroundColor = comparingColor
+					arr[index -1].style.backgroundColor = comparingColor
+					await swap(arr[index] , arr[index - 1])
+					temp = arr[index]
+					arr[index] = arr[index - 1];
+					arr[index -1] = temp
+					arr[index].style.backgroundColor = startColor
+					arr[index-1].style.backgroundColor = startColor
+					index--;
+				}
+
+				// Update all the pointers
+				start++;
+				mid++;
+				start2++;
+			}
+		}
+	}
+	async function mergeSort(arr, l, r){
+
+		var solvedColor =  "#B0EE9D";
+		var comparingColor = "#f47174";
+		var startColor = "#ffffff";
+
+		if (l < r)
+		{
+
+			// Same as (l + r) / 2, but avoids overflow
+			// for large l and r
+			let m = l + Math.floor((r - l) / 2);
+
+			// Sort first and second halves
+			await mergeSort(arr, l, m);
+			await mergeSort(arr, m + 1, r);
+
+			await merge(arr, l, m, r);
+
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 200)
+			);
+
+		}
+	}
+
+
+
+
+
+
+	// gets pivot index for quick sort
+	function partition(arr, low, high){
+		//pivot = arr[high]
+		pivot = Number(arr[high].getAttribute('val')); 
+		i = (low-1); // index of smaller element 
+		for (j=low; j<high; j++) 
+		{ 
+			// If current element is smaller than or 
+			// equal to pivot 
+			if (Number(arr[j].getAttribute('val')) <= pivot) 
+			// if (arr[j] <= pivot)
+			{ 
+				i++; 
+
+				// swap arr[i] and arr[j] 
+				swap(arr[i], arr[j])
+				temp = arr[i]; 
+				arr[i] = arr[j]; 
+				arr[j] = temp; 
+			} 
+		} 
+
+		// swap arr[i+1] and arr[high] (or pivot) 
+		swap(arr[i+1], arr[high])
+		temp = arr[i+1]; 
+		arr[i+1] = arr[high]; 
+		arr[high] = temp;
+		
+		return i+1; 
+	}
+
+	async function quickSort(arr, low, high){
+
+		var solvedColor =  "#B0EE9D";
+		var comparingColor = "#f47174";
+		var startColor = "#ffffff";
+
+		if (low < high) 
+		{ 
+			/* pi is partitioning index, arr[pi] is 
+			now at right place */
+			pi = partition(arr, low, high); 
+			arr[pi].style.backgroundColor = comparingColor
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 200)
+			);
+
+			// Recursively sort elements before 
+			// partition and after partition 
+			await quickSort(arr, low, pi-1); 
+			await quickSort(arr, pi+1, high); 
+			for (j = low; j<=high ; j++){
+				arr[j].style.backgroundColor = solvedColor
+			}
+		} 
+	}
+
+
+	// JavaScript program for implementation
+	// of Heap Sort
+	async function heapSort(arr)
+    {
+
+		var solvedColor =  "#B0EE9D";
+		var comparingColor = "#f47174";
+		var startColor = "#ffffff";
+
+        var n = arr.length;
+
+        // Build heap (rearrange array)
+        for (var i = Math.floor(n / 2) - 1; i >= 0; i--)
+            heapify(arr, n, i);
+
+        // One by one extract an element from heap
+        for (var i = n - 1; i > 0; i--) {
+
+            // Move current root to end
+			arr[0].style.backgroundColor = comparingColor
+			arr[i].style.backgroundColor = comparingColor
+			await swap(arr[0], arr[i])
+            var temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+			arr[0].style.backgroundColor = startColor
+			arr[i].style.backgroundColor = solvedColor
+
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 200)
+			);
+
+            // call max heapify on the reduced heap
+            await heapify(arr, i, 0);
+        }
+    }
+
+	// To heapify a subtree rooted with node i which is
+    // an index in arr[]. n is size of heap
+	async function heapify(arr, n, i)
+    {
+        var largest = i; // Initialize largest as root
+        var l = 2 * i + 1; // left = 2*i + 1
+        var r = 2 * i + 2; // right = 2*i + 2
+
+        // If left child is larger than root
+        if (l < n && Number(arr[l].getAttribute('val')) > Number(arr[largest].getAttribute('val')))
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < n && Number(arr[r].getAttribute('val')) > Number(arr[largest].getAttribute('val')))
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+			swap(arr[i], arr[largest])
+            var temp = arr[i];
+			arr[i] = arr[largest];
+            arr[largest] = temp;
+
+            // Recursively heapify the affected sub-tree
+            await heapify(arr, n, largest);
+        }
+    }
+
+	// Asynchronous BubbleSort function
+	async function BubbleSort(delay = 50) {
+		var blocks = document.querySelectorAll(".block");
+
+		// BubbleSort Algorithm
+		for (var i = 0; i < blocks.length; i += 1) {
+			for (var j = 0; j < blocks.length - i - 1; j += 1) {
+
+				var solvedColor =  "#B0EE9D";
+				var comparingColor = "#f47174";
+				var startColor = "#ffffff";
+
+				// To change background-color of the
+				// blocks to be compared
+				blocks[j].style.backgroundColor = comparingColor;
+				blocks[j + 1].style.backgroundColor = comparingColor;
+
+				// To wait for .1 sec
+				await new Promise((resolve) =>
+					setTimeout(() => {
+						resolve();
+					}, delay)
+				);
+
+				var value1 = Number(blocks[j].getAttribute('val'));
+				var value2 = Number(blocks[j + 1].getAttribute('val'));
+
+				// To compare value of two blocks
+				if (value1 > value2) {
+					await swap(blocks[j], blocks[j + 1]);
+					blocks = document.querySelectorAll(".block");
+				}
+
+				// Changing the color to the previous one
+				blocks[j].style.backgroundColor = startColor;
+				blocks[j + 1].style.backgroundColor = startColor;
+			}
+
+			//changing the color of greatest element
+			//found in the above traversal
+			blocks[blocks.length - i - 1]
+					.style.backgroundColor = solvedColor;
+		}
+	}
+
+	function getMax(arr,n){
+    let mx = Number(arr[0].getAttribute('val'));
+        for (let i = 1; i < n; i++)
+            if (Number(arr[i].getAttribute('val')) > mx)
+                mx = Number(arr[i].getAttribute('val'));
+        return mx;
+	}
+
+	async function countSort(arr,n,exp){
+    	let output = new Array(n); // output array
+        let i;
+        let count = new Array(10);
+        for(let i=0;i<10;i++)
+            count[i]=0;
+  
+        // Store count of occurrences in count[]
+        for (i = 0; i < n; i++)
+            count[Math.floor(Number(arr[i].getAttribute('val')) / exp) % 10]++;
+  
+        // Change count[i] so that count[i] now contains
+        // actual position of this digit in output[]
+        for (i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+  
+        // Build the output array
+        for (i = n - 1; i >= 0; i--) {
+            output[count[Math.floor(Number(arr[i].getAttribute('val')) / exp) % 10] - 1] = arr[i];
+            count[Math.floor(Number(arr[i].getAttribute('val')) / exp) % 10]--;
+        }
+  
+        // Copy the output array to arr[], so that arr[] now
+        // contains sorted numbers according to current digit
+		for (i = 0; i < n; i++){
+			await swap( arr[i], output[i])
+
+			index = arr.indexOf(output[i])
+			temp = arr[i]
+			arr[i] = output[i]
+			arr[index] = temp
+		}
+	}
+ 
+
+	async function radixSort(arr,n){
+
+    // Find the maximum number to know number of digits
+        let m = getMax(arr, n);
+  
+        // Do counting sort for every digit. Note that
+        // instead of passing digit number, exp is passed.
+        // exp is 10^i where i is current digit number
+        for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10)
+            await countSort(arr, n, exp);
+	}
+	  
+	// Function to generate the array of blocks
+	function generatearray() {
+		document.getElementById("array").innerHTML = ''
+	    var container = document.getElementById("array");
+		var blockNumber = document.getElementById("sorter-number").value
+		for (var i = 0; i < blockNumber; i++) {
+
+			// Return a value from 1 to 100 (both inclusive)
+			var value = Math.ceil(Math.random() * 100);
+
+			// Creating element div
+			var array_ele = document.createElement("div");
+
+			// Adding class 'block' to div
+			array_ele.classList.add("block");
+
+			// Adding style to div
+			array_ele.style.height = `${value * .5}vh`;
+			if (blockNumber > 35){
+				array_ele.style.width =  `${63/blockNumber}vw`   // 1.8 * 35 = 63 -->> 63 / # = width  : where 63 is total length of blocks blocks for < 35
+				array_ele.style.left = `${(35 * -1.05) + 49}vw`;
+				array_ele.style.transform =  `translate(${i * (71.4/ (blockNumber-1))}vw)` // 35 * 2.1 = 71.4 -->> 71.4 / # = translate  : where 71.4 is total length of space between blocks for < 35
+			}
+			else {
+				array_ele.style.width = '1.8vw';
+				array_ele.style.left = `${(blockNumber * -1.05) + 49}vw`;
+				array_ele.style.transform = `translate(${i * 2.1}vw)`;
+			}
+
+			array_ele.setAttribute('val', value)
+
+			// Creating label element for displaying
+			// size of particular block
+			var array_ele_label = document.createElement("label");
+			array_ele_label.classList.add("block_id");
+			// array_ele_label.innerText = value;
+
+			// Appending created elements to index.html
+			array_ele.appendChild(array_ele_label);
+			container.appendChild(array_ele);
+		}
+	}
+
+
+
+	// Promise to swap two blocks
+	async function swap(el1, el2) {
+	    var container = document.getElementById("array");
+		return new Promise((resolve) => {
+
+			// For exchanging styles of two blocks
+			var temp = el1.style.transform;
+			el1.style.transform = el2.style.transform;
+			el2.style.transform = temp;
+			speed = 301 - parseInt(document.getElementById('sorter-slider').value)
+			window.requestAnimationFrame(function() {
+				setTimeout(() => {
+					container.insertBefore(el2, el1);
+					resolve();
+				}, speed);
+			});
+		});
+	}
+
+
+	function generateGrid(){
+		gridContainer = document.getElementsByClassName("path-grid")[0]
+		gridContainer.innerHTML = ''
+		for (var j = 0; j < 30; j++){ 
+			rowElement = document.createElement("div")
+			rowElement.classList += "pathGrid-row"
+			rowElement.setAttribute('num', j)
+			gridContainer.appendChild(rowElement)
+			for (var i = 0; i < 65; i++){
+				cellElement = document.createElement("div")
+				cellElement.classList += "pathGrid-cell"
+				cellElement.setAttribute('num', (j*65)+i)
+				cellElement.setAttribute('isWall', false)
+				if (j == 5 && i == 12){cellElement.style.backgroundColor = '#B0EE9D' }
+				if (j == 25 && i == 53){cellElement.style.backgroundColor =   '#f47174'}
+				rowElement.appendChild(cellElement)
+			}
+		}
+	}
+
+	class node {
+        constructor(cell) {
+            this.val = cell
+			this.parent = null
+        }
+
+		getSuccessors(){
+			return getNodeNeighbors(this.val)
+		}
+    }
+
+
+
+	// User defined class
+	// to store element and its priority
+	class QElement {
+		constructor(element, priority)
+		{
+			this.element = element;
+			this.priority = priority;
+		}
+	}
+
+	// PriorityQueue class
+	class PriorityQueue {
+
+		// An array is used to implement priority
+		constructor()
+		{
+			this.items = [];
+		}
+
+		// enqueue function to add element
+		// to the queue as per priority
+		enqueue(element, priority){
+		// creating object from queue element
+			var qElement = new QElement(element, priority);
+			var contain = false;
+
+			// iterating through the entire
+			// item array to add element at the
+			// correct location of the Queue
+			for (var i = 0; i < this.items.length; i++) {
+				if (this.items[i].priority > qElement.priority) {
+					// Once the correct location is found it is
+					// enqueued
+					this.items.splice(i, 0, qElement);
+					contain = true;
+					break;
+				}
+			}
+
+			// if the element have the highest priority
+			// it is added at the end of the queue
+			if (!contain) {
+				this.items.push(qElement);
+			}
+		}
+
+		// dequeue method to remove
+		// element from the queue
+		dequeue(){
+			// return the dequeued element
+			// and remove it.
+			// if the queue is empty
+			// returns Underflow
+			if (this.isEmpty())
+				return "Underflow";
+			return this.items.shift();
+		}
+
+		// front function
+		front(){
+			// returns the highest priority element
+			// in the Priority queue without removing it.
+			if (this.isEmpty())
+				return "No elements in Queue";
+			return this.items[0];
+		}
+
+		// rear function
+		rear(){
+			// returns the lowest priority
+			// element of the queue
+			if (this.isEmpty()) return "No elements in Queue";
+			return this.items[this.items.length - 1];
+		}
+
+		// isEmpty function
+		isEmpty(){
+			// return true if the queue is empty.
+			return this.items.length == 0;
+		}
+	}
+
+
+
+	function getNodeNeighbors(cell) {
+		nodeNum = parseInt(cell.getAttribute("num"))   // Below remember to consider substracting or adding to edges
+		nodeList = []
+		if (nodeNum - 65 > 0 && document.getElementsByClassName("pathGrid-cell")[nodeNum-65].getAttribute('isWall') != 'true' ){
+			aboveNode = document.getElementsByClassName("pathGrid-cell")[nodeNum-65]
+			nodeList.push(aboveNode)
+		}
+		if (nodeNum + 65 < 1950 && document.getElementsByClassName("pathGrid-cell")[nodeNum+65].getAttribute('isWall') != 'true'){
+			belowNode = document.getElementsByClassName("pathGrid-cell")[nodeNum+65]
+			nodeList.push(belowNode)
+		}
+		if (((nodeNum - 64) % 65) != 0 && document.getElementsByClassName("pathGrid-cell")[nodeNum+1].getAttribute('isWall') != 'true'){
+			rightNode = document.getElementsByClassName("pathGrid-cell")[nodeNum+1]
+			nodeList.push(rightNode)
+		} 
+		if ((nodeNum % 65) != 0 && document.getElementsByClassName("pathGrid-cell")[nodeNum-1].getAttribute('isWall') != 'true'){
+			leftNode = document.getElementsByClassName("pathGrid-cell")[nodeNum-1]
+			nodeList.push(leftNode)
+		} 
+		return nodeList
+	}
+
+	async function breadthFistSearch(){  // the shift function makes the ques removal not big O 1
+		startState = document.getElementsByClassName("pathGrid-cell")[337]
+		goalState =  document.getElementsByClassName("pathGrid-cell")[1678]
+		start = new node(startState)
+		que = [start]
+		visitedList = [startState]
+
+		while(que.length > 0 ){
+			curNode = que.shift() //returns fist in line
+			if (curNode.val != goalState){
+				curNode.getSuccessors().forEach(neighbor => {
+					if (!(visitedList.includes(neighbor))) {
+						child = new node(neighbor)
+						child.parent = curNode
+						que.push(child)
+						if (neighbor != goalState) neighbor.style.backgroundColor = 'rgb(209, 209, 209,.5)'
+						visitedList.push(neighbor)
+					}
+				});
+			}
+			else return curNode
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 46 - parseInt(document.getElementById('path-slider').value ))
+			);
+		}
+	}
+
+
+	function heuristic(cell){
+		cellNum = parseInt(cell.getAttribute("num"))
+		xDiff = (cellNum%65) - (1678%65)
+		yDiff = Math.floor(cellNum/65) - Math.floor(1678/65)
+		distance = Math.sqrt( Math.pow(xDiff, 2) + Math.pow(yDiff, 2))
+		return distance
+	}
+
+	async function aStarSearch(){  // the shift function makes the ques removal not big O 1
+		startState = document.getElementsByClassName("pathGrid-cell")[337]
+		goalState =  document.getElementsByClassName("pathGrid-cell")[1678]
+		start = new node(startState)
+		que = new PriorityQueue()
+		que.enqueue(start, heuristic(start.val))
+		visitedList = [startState]
+
+		while(!que.isEmpty() ){
+			curNode = que.dequeue().element
+			curNode.val.style.backgroundColor = 'rgb(209, 209, 209,.5)'
+			// visitedList.push(curNode.val)
+			if (curNode.val != goalState){
+				curNode.getSuccessors().forEach(neighbor => {
+					if (!(visitedList.includes(neighbor))) {
+						child = new node(neighbor)
+						child.parent = curNode
+						visitedList.push(neighbor)
+						que.enqueue(child, heuristic(child.val))
+						neighbor.style.backgroundColor = 'rgb(209, 209, 209,.5)'
+					}
+				});
+			}
+			else return curNode
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 46 - parseInt(document.getElementById('path-slider').value ))
+			);
+		}
+	}
+
+	async function depthFirstSearch(){  // the shift function makes the ques removal not big O 1
+		startState = document.getElementsByClassName("pathGrid-cell")[337]
+		goalState =  document.getElementsByClassName("pathGrid-cell")[1678]
+		start = new node(startState)
+		stack = [start]
+		visitedList = [startState]
+
+		while(stack.length > 0 ){
+			curNode = stack.pop() //returns fist in line
+			if (curNode.val != goalState){
+				curNode.getSuccessors().forEach(neighbor => {
+					if (!(visitedList.includes(neighbor))) {
+						child = new node(neighbor)
+						child.parent = curNode
+						stack.push(child)
+						if (neighbor != goalState) neighbor.style.backgroundColor = 'rgb(209, 209, 209,.5)'
+						visitedList.push(neighbor)
+					}
+				});
+			}
+			else return curNode
+			await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 46 - parseInt(document.getElementById('path-slider').value ))
+			);
+		}
+	}
+
+
+
+	async function highlightPath(vertex){
+		vertex.val.style.backgroundColor = '#defeff'
+		await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 46 - parseInt(document.getElementById('path-slider').value ))
+			);
+		if (vertex.parent != null) highlightPath(vertex.parent)
+	}
+
+
+
+
+
+	function pathReset(){
+		cells = document.getElementsByClassName("pathGrid-cell")
+		for (i = 0; i < cells.length; i++){
+			if (i != 337 && i != 1678){
+				 cells[i].style.backgroundColor = 'rgba(103, 212, 255, 0)'
+				 cells[i].setAttribute('isWall', false)
+			}
+			else if (i == 337 ) cells[i].style.backgroundColor = '#B0EE9D'	
+			else if (i == 1678 ) cells[i].style.backgroundColor = '#f47174'
+		}
+	}
+
+	document.getElementById("path-resetButton").addEventListener("click", function(){
+		pathReset()
+		document.getElementById('path-solveButton').disabled = false
+		document.getElementById('path-solveButton').style.backgroundColor = 'rgb(221, 144, 72)'
+	})
+
+
+	var isMouseDown = false
+	document.onmousedown = docOnMousedown;
+  	document.onmouseup = docOnMouseup;
+
+	function docOnMousedown(){
+  		mouseIsDown = true;
+	}
+	function docOnMouseup(){
+  		mouseIsDown = false;
+	}
+
+	function addCellEventListeners(){
+		cells = document.getElementsByClassName("pathGrid-cell")
+		for (i = 0; i < cells.length; i++){
+			if ( i != 337 && i != 1678){
+				cells[i].addEventListener("mouseover", function(){
+					if (mouseIsDown == true){
+						this.setAttribute('isWall', true) 
+				 		this.style.backgroundColor = 'rgba(103, 212, 255, 0.747)'
+					}
+				})
+			}
+		}
+	}
+
+	function onclickFunc1(){
+		document.getElementsByClassName('Sorter')[0].style.display = ''
+		document.getElementById('title-base').style.display = 'none'
+		document.getElementById('selector-base').style.display = 'none'
+		document.getElementById('about-base-container').style.display = 'none'
+		document.getElementById('footer-base').style.display = 'none'
+    	generatearray();
+	}
+
+	function onclickFunc2(){
+		document.getElementById('title-base').style.display = 'none'
+		document.getElementById('selector-base').style.display = 'none'
+		document.getElementById('about-base-container').style.display = 'none'
+		document.getElementById('footer-base').style.display = 'none'
+		document.getElementsByClassName('pathfinder')[0].style.display = ''
+		generateGrid()
+		addCellEventListeners()
+	}
+
+	function renderHome(){
+		document.getElementsByClassName('pathfinder')[0].style.display = 'none'
+		document.getElementsByClassName('Sorter')[0].style.display = 'none'
+		document.getElementById('title-base').style.display = ''
+		document.getElementById('selector-base').style.display = ''
+		document.getElementById('about-base-container').style.display = ''
+		document.getElementById('footer-base').style.display = ''
+	}
+
+	document.getElementsByClassName('exit-button')[0].addEventListener('click', function(){renderHome()})
+	document.getElementsByClassName('exit-button')[1].addEventListener('click', function(){renderHome()})
+
+
+	document.getElementsByClassName('pathfinder')[0].style.display = 'none'
+	document.getElementsByClassName('Sorter')[0].style.display = 'none'
+	document.getElementsByClassName('path-img')[0].addEventListener('click', function (){onclickFunc2()});
+	document.getElementsByClassName('sorting-img')[0].addEventListener('click', function (){onclickFunc1()});
+	document.getElementsByClassName('stock-img')[0].addEventListener('click', function(){location.href = 'https://github.umn.edu/fee00003/stockTrader'})
+	document.getElementById('sorter-resetButton').addEventListener('click', function () {
+		document.getElementById('sorter-sortButton').disabled = false
+		document.getElementById('sorter-sortButton').style.color = 'rgb(0, 0, 0)'
+		document.getElementById('sorter-sortButton').style.backgroundColor = 'rgb(221, 144, 72)'
+		generatearray()
+	});
+
+	document.getElementById('path-solveButton').addEventListener('click', async function(){
+		document.getElementById("path-resetButton").disabled = true
+		document.getElementById("path-resetButton").style.backgroundColor = 'rgb(233, 233, 233, .8)'
+		this.style.backgroundColor = 'rgb(233, 233, 233, .8)'
+		this.disabled = true
+		algorithmName = document.getElementById('path-dropdown').value
+		goalNode=null
+		switch(algorithmName){
+			case 'Breadth First':
+				goalNode =  await breadthFistSearch()
+				break
+			case 'Depth First':
+				goalNode =  await depthFirstSearch()
+				break
+			case 'A*':
+				goalNode =  await aStarSearch()
+				break
+			default:  break
+		}
+		await highlightPath(goalNode)
+		document.getElementById("path-resetButton").disabled = false
+		document.getElementById("path-resetButton").style.backgroundColor = 'rgb(221, 144, 72)'
+	})
+
+
+	document.getElementsByClassName("table-arrows")[0].addEventListener('click', async function(){ await switchWidgetsLeft() })
+	document.getElementsByClassName("table-arrows")[1].addEventListener('click', async function(){ await switchWidgetsRight() })
+
+	async function switchWidgetsRight(){
+		document.getElementById('selector-summary').style.opacity = '0'
+		document.getElementById('selector-title').style.opacity = '0'
+		document.getElementsByClassName('sorting-img')[0].style.opacity = '0'
+		document.getElementsByClassName('path-img')[0].style.opacity = '0'
+		document.getElementsByClassName('stock-img')[0].style.opacity = '0'	
+
+		containers = []
+		containers.push(document.getElementsByClassName('side-widget')[0])
+		containers.push(document.getElementsByClassName('main-widget')[0])
+		containers.push(document.getElementsByClassName('side-widget')[1])
+
+		await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 400)
+		);
+
+		// excahnge images locaitons
+		temp = containers[0].innerHTML
+		containers[0].innerHTML = containers[2].innerHTML
+		containers[2].innerHTML = containers[1].innerHTML
+		containers[1].innerHTML = temp
+
+		//exchange image css properties
+		mainImageCss = `
+			width: 35vh;
+    		height: 35vh;
+    		border-radius: 1vh;
+    		transition: all .4s ease;
+		`
+		sideImageCss = `
+			width: 17vh;
+    		height: 17vh;
+    		transition: all .4s ease;
+    		border-radius: 1vh;
+    		padding-top: 1vh;
+		`
+
+		containers[1].childNodes[0].style.cssText = mainImageCss
+		containers[2].childNodes[0].style.cssText = sideImageCss
+
+		document.getElementsByClassName('path-img')[0].addEventListener('click', function (){onclickFunc2()});
+		document.getElementsByClassName('sorting-img')[0].addEventListener('click', function (){onclickFunc1()});
+		document.getElementsByClassName('stock-img')[0].addEventListener('click', function(){location.href = 'https://github.umn.edu/fee00003/stockTrader'})		
+
+		document.getElementsByClassName('sorting-img')[0].style.opacity = '1'
+		document.getElementsByClassName('path-img')[0].style.opacity = '1'
+		document.getElementsByClassName('stock-img')[0].style.opacity = '1'
+		document.getElementById('selector-summary').style.opacity = '1'
+		document.getElementById('selector-title').style.opacity = '1'
+		
+		changeProjectDescription()
+	
+	}
+
+
+	function changeProjectDescription(){
+		sortDesc =`<p class='selector-text'>
+                            This project provides a easy way to visually compare different sorting algorithms.
+                            The visualizer allows from a selection of 6 popular sorting aglorihms, control of speed,
+                            and control over the size of the array being sorted. This project is renderd in browser 
+                            for your experience and the code can be viewed on <a class="selector-links" href='https://github.umn.edu/fee00003'>Github</a>. 
+                        </p>`
+		pathFinderDesc = `<p class='selector-text'>
+                            This project provides a easy way to visually compare different path finding algorithms.
+                            The visualizer allows from a slection of 3 popular sorting aglorihms, control of speed,
+                            and the ability to draw obstacles between the goal and start nodes. This project is 
+							renderd in browser for your experience and the code can be viewed on <a class="selector-links" href='https://github.umn.edu/fee00003'>Github</a>. 
+                        </p>`
+		stockDesc = `<p class='selector-text'>
+                            This project is still is a work in progress but the intent is to leverage evolutionary 
+							algorithms and stock API's to make a succesful trading bot. The program currently has a
+							backend database containing all the data and a Java program that interacts with the database
+							to make decisions on when to buy and sell. The project can be viewed on <a class="selector-links" href='https://github.umn.edu/fee00003/stockTrader'>Github</a>.
+                        </p>`
+		
+		className = document.getElementsByClassName('main-widget')[0].childNodes[0].className
+		projectDescObj = document.getElementById('selector-summary') 
+		switch (className){
+			case 'sorting-img':
+				projectDescObj.innerHTML = sortDesc
+				document.getElementById('selector-title').innerHTML = `<b>Sorting Visualizer</b>`
+				break
+			case 'path-img':
+				projectDescObj.innerHTML = pathFinderDesc
+				document.getElementById('selector-title').innerHTML = `<b>Path Finding Visualizer</b>`
+				break
+			case 'stock-img':
+				projectDescObj.innerHTML = stockDesc
+				document.getElementById('selector-title').innerHTML = `<b>Trading Bot</b>`
+				break
+		}
+	}
+
+	
+
+	async function switchWidgetsLeft(){
+		document.getElementById('selector-summary').style.opacity = '0'
+		document.getElementById('selector-title').style.opacity = '0'
+		document.getElementsByClassName('sorting-img')[0].style.opacity = '0'
+		document.getElementsByClassName('path-img')[0].style.opacity = '0'
+		document.getElementsByClassName('stock-img')[0].style.opacity = '0'	
+
+		containers = []
+		containers.push(document.getElementsByClassName('side-widget')[0])
+		containers.push(document.getElementsByClassName('main-widget')[0])
+		containers.push(document.getElementsByClassName('side-widget')[1])
+
+		await new Promise((resolve) =>
+				setTimeout(() => {
+					resolve();
+				}, 400)
+		);
+
+
+		// excahnge images locaitons
+		temp = containers[0].innerHTML
+		containers[0].innerHTML = containers[1].innerHTML
+		containers[1].innerHTML = containers[2].innerHTML
+		containers[2].innerHTML = temp
+
+		//exchange image css properties
+		mainImageCss = `
+			width: 35vh;
+    		height: 35vh;
+    		border-radius: 1vh;
+    		transition: all .4s ease;
+		`
+		sideImageCss = `
+			width: 17vh;
+    		height: 17vh;
+    		transition: all .4s ease;
+    		border-radius: 1vh;
+    		padding-top: 1vh;
+		`
+
+		containers[1].childNodes[0].style.cssText = mainImageCss
+		containers[0].childNodes[0].style.cssText = sideImageCss
+
+		document.getElementsByClassName('path-img')[0].addEventListener('click', function (){onclickFunc2()});
+		document.getElementsByClassName('sorting-img')[0].addEventListener('click', function (){onclickFunc1()});
+		document.getElementsByClassName('stock-img')[0].addEventListener('click', function(){location.href = 'https://github.umn.edu/fee00003/stockTrader'})
+
+		document.getElementsByClassName('sorting-img')[0].style.opacity = '1'
+		document.getElementsByClassName('path-img')[0].style.opacity = '1'
+		document.getElementsByClassName('stock-img')[0].style.opacity = '1'
+		document.getElementById('selector-summary').style.opacity = '1'
+		document.getElementById('selector-title').style.opacity = '1'
+
+		changeProjectDescription()
+		
+	}
+
+	document.getElementsByClassName('menu-container')[0].addEventListener('click', function(){menuIcon()});
+
+	function menuIcon() {
+  		document.getElementsByClassName('menu-container')[0].classList.toggle("change");
+		// document.getElementsByClassName('menu-container')[0].style.background= 'rgb(255, 255, 255,1)'
+	}
+
+	document.getElementById('sorter-sortButton').addEventListener('click', async function () {
+		document.getElementById('sorter-sortButton').disabled = true
+		document.getElementById('sorter-sortButton').style.color = 'rgb(233, 233, 233, .8)'
+		document.getElementById('sorter-sortButton').style.backgroundColor = 'rgb(181, 181, 181)'
+		if(document.getElementById('sorter-dropdown').value == 'Bubble Sort'){
+			console.log(document.getElementById('sorter-dropdown').value)
+			BubbleSort()
+		}
+		else if (document.getElementById('sorter-dropdown').value == 'Quick Sort'){
+			console.log(document.getElementById('sorter-dropdown').value)
+			var blocks = document.getElementsByClassName("block")
+			var arr = [].slice.call(blocks);
+			low = 0
+			high = blocks.length - 1
+			quickSort(arr, low, high)	
+		}
+		else if (document.getElementById('sorter-dropdown').value == 'Merge Sort'){
+			console.log(document.getElementById('sorter-dropdown').value)
+			var blocks = document.getElementsByClassName("block")
+			var arr = [].slice.call(blocks);
+			await mergeSort(arr, 0, arr.length -1)
+			var solvedColor =  "#B0EE9D";
+			for (j = 0; j<arr.length ; j++){
+				arr[j].style.backgroundColor = solvedColor
+			}	
+		}
+		else if (document.getElementById('sorter-dropdown').value == 'Heap Sort'){
+			console.log(document.getElementById('sorter-dropdown').value)
+			var blocks = document.getElementsByClassName("block")
+			var arr = [].slice.call(blocks);
+			await heapSort(arr)
+			var solvedColor =  "#B0EE9D";
+			arr[0].style.backgroundColor = solvedColor	
+		}
+		else if (document.getElementById('sorter-dropdown').value == 'Radix Sort'){
+			console.log(document.getElementById('sorter-dropdown').value)
+			var blocks = document.getElementsByClassName("block")
+			var arr = [].slice.call(blocks);
+			await radixSort(arr, arr.length)
+			var solvedColor =  "#B0EE9D";
+			for (j = 0; j<arr.length ; j++){
+				arr[j].style.backgroundColor = solvedColor
+			}		
+		}
+		else {
+			console.log(document.getElementById('sorter-dropdown'))
+		}
+	});
+  </script>
 </html>

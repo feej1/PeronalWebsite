@@ -1,0 +1,8 @@
+
+.background-base {
+    background-image: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0, 1)),
+    url("./code-img.PNG");
+}
+
+/* consider making a gradient to white for photo */

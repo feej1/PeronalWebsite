@@ -1,0 +1,91 @@
+.exit-button {
+    font-size: 400%;
+    color: rgb(221, 144, 72); 
+    float: right;
+    margin-right: 2vw;
+    margin-left: -10vw;
+}
+
+.exit-button:hover {
+    cursor: pointer;
+}
+
+.exit-link:any-link {
+    color: rgb(221, 144, 72);
+    text-decoration: none;
+}
+
+.pathGrid-cell {
+    height: 1vw;
+    width: 1vw;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.767);
+    border-width: .1vw;
+    display: inline-block;
+    margin-bottom: -.3%;
+}
+
+.path-grid {
+    margin-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+#path-title {
+	font-family: 'Poppins', sans-serif;
+	font-size: 700% ;
+	padding: 1vh 3vh;
+	cursor: pointer;
+    border-radius: 8px;
+    background-color: rgb(221, 144, 72); 
+    color:rgb(0, 0, 0);
+    text-align: center;
+    border: .5vh solid #fcfafa;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.path-parameters {
+	color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+	font-size: 200% ;
+	padding-left: 3vh;
+	padding-right: 1vh;
+}
+
+#path-parameter-container {
+	display: block;
+	margin-bottom: 2vh;
+	margin-top: 6vh;
+}
+
+#path-dropdown {
+	font-family: 'Poppins', sans-serif;
+	font-size: 150% ;
+}
+
+#path-corner, #path-adjacent {
+	font-family: 'Poppins', sans-serif;
+	font-size: 150% ;
+	width: 8vh;
+}
+
+
+
+.path-buttons {
+	font-family: 'Poppins', sans-serif;
+	font-size: 200% ;
+	padding: 1vh 3vh;
+	cursor: pointer;
+    border-radius: 4px;
+    background-color: rgb(221, 144, 72); 
+    color:rgb(0, 0, 0);
+    text-align: center;
+    border: .2vh solid #fcfafa;
+    font-family: 'Poppins', sans-serif;
+}
+
+#path-solveButton {
+	margin-right: 30vh;
+}
